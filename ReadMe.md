@@ -33,50 +33,8 @@ Here is a small snippet of code on how to load and use the model:
 >>> wav_paths = glob.glob(os.path.join(wav_folder, "*.wav"))
 >>> device="cuda:1"
 >>> 
->>> 
->>> waveforms_list = []
->>> lengths = []
->>> 
->>> for fp in file_paths:
-...     audio, sr = torchaudio.load(fp)
-...     if sr != model.sample_rate:
-...             resampler = torchaudio.transforms.Resample(sr, model.sample_rate)
-...             audio = resampler(audio)
-...     if audio.shape[0] > 1:
-...             audio = torch.mean(audio, dim=0, keepdim=True)
-...     lengths.append(audio.shape[-1])
-...     waveforms_list.append(audio)
-... 
-Traceback (most recent call last):
-  File "<stdin>", line 1, in <module>
-NameError: name 'file_paths' is not defined
->>> for fp in wav_paths:
-...     audio, sr = torchaudio.load(fp)
-...     if sr != model.sample_rate:
-...             resampler = torchaudio.transforms.Resample(sr, model.sample_rate)
-...             audio = resampler(audio)
-...     if audio.shape[0] > 1:
-...             audio = torch.mean(audio, dim=0, keepdim=True)
-...     lengths.append(audio.shape[-1])
-...     waveforms_list.append(audio)
-... 
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-NameError: name 'model' is not defined
->>> checkpoint = torch.load(checkpoint_path, map_location=device)
-Traceback (most recent call last):
-  File "<stdin>", line 1, in <module>
-NameError: name 'checkpoint_path' is not defined
 >>> checkpoint = "ser_checkpoints/best_model.pt"
->>> checkpoint = torch.load(checkpoint_path, map_location=device)
-Traceback (most recent call last):
-  File "<stdin>", line 1, in <module>
-NameError: name 'checkpoint_path' is not defined
 >>> checkpoint_path = "ser_checkpoints/best_model.pt"
->>> model = load_model_from_checkpoint(checkpoint_path, device=device)
-Traceback (most recent call last):
-  File "<stdin>", line 1, in <module>
-NameError: name 'load_model_from_checkpoint' is not defined
 >>> checkpoint = torch.load(checkpoint_path, map_location=device)
 <stdin>:1: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
 >>> model = SERModel()
