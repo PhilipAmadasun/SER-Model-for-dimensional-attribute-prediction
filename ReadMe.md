@@ -228,15 +228,6 @@ SERModel(
 >>> predictions
 tensor([[5.9269, 3.6954, 6.0617],
         [4.5463, 0.9685, 4.9926]], device='cuda:1')
->>> with torch.no_grad():
-...     
-KeyboardInterrupt
->>> with torch.no_grad():
-...     predictions = model(batched_waveforms, masks)
-... 
->>> predictions
-tensor([[5.9269, 3.6954, 6.0617],
-        [4.5463, 0.9685, 4.9926]], device='cuda:1')
 ```
 
 
