@@ -12,6 +12,11 @@ The main objectives of this project are:
 - 🔄 Improved prediction accuracy for **valence** and **arousal**.  
 
 ## Training Details
+  Current versions of relevant libraries used for this work:
+    torch                             2.5.1
+    torchaudio                        2.5.1
+    torchvision                       0.20.1
+
 - The model was trained using **Concordance Correlation Coefficient (CCC) loss**, as in the original implementation.
 - Evaluation metrics will be provided soon.
 - The best-performing checkpoint is available—feel free to test it out and provide feedback!
