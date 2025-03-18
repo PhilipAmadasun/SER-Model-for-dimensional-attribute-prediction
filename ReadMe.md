@@ -252,35 +252,6 @@ SERModel(
 >>> 
 >>> batched_waveforms = batched_waveforms.to(device)
 >>> masks = masks.to(device)
->>> 
->>> if normalize:
-...     mean = model.mean.to(device)
-...      std = model.std.to(device)
-  File "<stdin>", line 3
-    std = model.std.to(device)
-IndentationError: unexpected indent
->>> if normalize:
-...     mean = model.mean.to(device)
-...     std = model.std.to(device)
-...     batched_waveforms = (batched_waveforms - mean) / (std + 1e-6)
-... 
-Traceback (most recent call last):
-  File "<stdin>", line 1, in <module>
-NameError: name 'normalize' is not defined
->>> normalize = True
->>> if normalize:
-...     mean = model.mean.to(device)
-...     std = model.std.to(device)
-...      batched_waveforms = (batched_waveforms - mean) / (std + 1e-6)
-  File "<stdin>", line 4
-    batched_waveforms = (batched_waveforms - mean) / (std + 1e-6)
-IndentationError: unexpected indent
->>> if normalize:
-... mean = model.mean.to(device)
-  File "<stdin>", line 2
-    mean = model.mean.to(device)
-    ^
-IndentationError: expected an indented block after 'if' statement on line 1
 >>> if normalize:
 ...     mean = model.mean.to(device)
 ...     std = model.std.to(device)
