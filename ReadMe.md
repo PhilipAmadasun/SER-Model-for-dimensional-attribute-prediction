@@ -9,7 +9,7 @@ The current checkpoints have been trained on a small subset of the [MSP-Podcast 
 The main objectives of this project are:
 - ✅ Direct loading with PyTorch for greater flexibility in development.  
 - ✅ Defined class structure with a feedforward method for easier integration.  
-- 🔄 Improved prediction accuracy for **valence** and **arousal**.  
+- 🔄 Improved prediction accuracy for **valence** and **arousal**.
 
 ### Library Versions
 The following library versions were used for this work:
@@ -92,7 +92,8 @@ print(predictions)
 ```
 
 ## Future Work
-I plan to integrate a **Density Adaptive Attention Block** before or after the transformer layers to explore potential performance improvements.
+* Integrate a **Density Adaptive Attention Block** before or after the transformer layers to explore potential performance improvements.
+* Test feature extraction via Log Mel Spectrogram instead if pretrain WavLM SSL layers for lighter overhead, might need to test with DAAM to improve or atleast mitigate accuracy.
 
 ## Reference
 If you're interested in Density Adaptive Attention, check out the following paper:
