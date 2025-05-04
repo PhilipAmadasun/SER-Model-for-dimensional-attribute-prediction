@@ -270,6 +270,22 @@ print(f"PyTorch (GPU): {pt_scores}")
 print(f"ONNX‑RT (GPU): {ort_scores}")
 print(f"max |Δ|       : {(np.abs(pt_scores - ort_scores)).max():.6f}")
 ```
+
+Looking decent so far
+```
+test_ser_onnx.py my_audio_wavs/test_audio.wav
+=== Emotion scores ===
+PyTorch (GPU): [5.9269137 3.6953883 6.0616913]
+ONNX‑RT (GPU): [5.9269595 3.6959462 6.061699 ]
+max |Δ|       : 0.000558
+
+test_ser_onnx.py my_audio_wavs/test_audio1.wav
+=== Emotion scores ===
+PyTorch (GPU): [4.5547924 0.8715324 5.0094886]
+ONNX‑RT (GPU): [4.5539904  0.87481815 5.008607  ]
+max |Δ|       : 0.003286
+```
+
 ## Future Work
 * Integrate a **Density Adaptive Attention Block** before or after the transformer layers to explore potential performance improvements.
 * Test feature extraction via Log Mel Spectrogram instead if pretrain WavLM SSL layers for lighter overhead, might need to test with DAAM to improve or atleast mitigate accuracy.
