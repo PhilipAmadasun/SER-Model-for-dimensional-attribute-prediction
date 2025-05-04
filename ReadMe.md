@@ -190,14 +190,14 @@ print("✓  ser_dyn.onnx regenerated with trained weights")
 I compare the results of the original torch and onnx models to make sure I'm getting around the same predictions and precision.
 ```python
 #!/usr/bin/env python3
-# test_ser_onnx_gpu.py  – compare PyTorch vs. ONNX‑Runtime (CUDA)
+# test_ser_onnx.py  – compare PyTorch vs. ONNX‑Runtime (CUDA)
 # ---------------------------------------------------------------
 import sys, pathlib, os, datetime, numpy as np, torch, torchaudio, onnx, onnxruntime as ort
 from SER_Model_setup import SERModel
 
 # ---------- CLI arg --------------------------------------------------------
 if len(sys.argv) != 2:
-    print("Usage: python test_ser_onnx_gpu.py <audio.wav>")
+    print("Usage: python test_ser_onnx.py <audio.wav>")
     sys.exit(1)
 wav_path = pathlib.Path(sys.argv[1]).expanduser().resolve()
 assert wav_path.is_file(), f"{wav_path} not found"
@@ -273,13 +273,13 @@ print(f"max |Δ|       : {(np.abs(pt_scores - ort_scores)).max():.6f}")
 
 Looking decent so far
 ```
-test_ser_onnx.py my_audio_wavs/test_audio.wav
+./test_ser_onnx.py my_audio_wavs/test_audio.wav
 === Emotion scores ===
 PyTorch (GPU): [5.9269137 3.6953883 6.0616913]
 ONNX‑RT (GPU): [5.9269595 3.6959462 6.061699 ]
 max |Δ|       : 0.000558
 
-test_ser_onnx.py my_audio_wavs/test_audio1.wav
+./test_ser_onnx.py my_audio_wavs/test_audio1.wav
 === Emotion scores ===
 PyTorch (GPU): [4.5547924 0.8715324 5.0094886]
 ONNX‑RT (GPU): [4.5539904  0.87481815 5.008607  ]
