@@ -1,6 +1,6 @@
 # Pytorch SER Model
 Model weights and extra information (onnx format, tensorrt compiled model) can be found in my [huggingface](https://huggingface.co/uyiosa/SER-WavLM-Multi-Attributes)
-This repository contains a Speech Emotion Recognition (SER) model inspired by [3loi/SER-Odyssey-Baseline-WavLM-Multi-Attributes](https://huggingface.co/3loi/SER-Odyssey-Baseline-WavLM-Multi-Attributes). The model is implemented in PyTorch and supports batch inference.
+.This repository contains a Speech Emotion Recognition (SER) model inspired by [3loi/SER-Odyssey-Baseline-WavLM-Multi-Attributes](https://huggingface.co/3loi/SER-Odyssey-Baseline-WavLM-Multi-Attributes). The model is implemented in PyTorch and supports batch inference.
 
 ## Dataset
 The current checkpoints have been trained on a small subset of the [MSP-Podcast dataset](https://ecs.utdallas.edu/research/researchlabs/msp-lab/MSP-Podcast.html).
