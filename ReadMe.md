@@ -91,7 +91,7 @@ with torch.no_grad():
 # Print predictions
 print(predictions)
 ```
-## Compiling model to TensorRT
+## Compiling model to TensorRT from torch
 To my knowledge, the safest route to model compiling for models that accept inputs of varied length is to first convert to onnx. From my cursory research, torch is sometimes bad at figuring out if a input is a safe size to work with, even if you provide the maximum, minimum and general size of input the model would process. This will lead to errors. For example:
 Using **torch_tensorrt** for compiling 
 ```python
@@ -285,6 +285,21 @@ PyTorch (GPU): [4.5547924 0.8715324 5.0094886]
 ONNX‑RT (GPU): [4.5539904  0.87481815 5.008607  ]
 max |Δ|       : 0.003286
 ```
+
+## TensorRT compiling from ONNX
+The fun and pain continue, you have to build tensorrt build and runtime libraries. I ultimately want to run my compiled model on an Nvidia edge device .... which involves building the correctdocker image, which was a hassle and didnt work, I tried a bunch of different images from the **jetson-containers** repo, they all failed. Either torch, or some other critical component is missing, you try to install it and that fails, and on and on. I think I finally found a repo that could work which I forked [here](https://github.com/PhilipAmadasun/TensorRT). It has instructions to build images for both the x86_64 and aarch64 architectures. I followed these instructions (I'll probably go into further detail on that in a later update). If the build is successful, in your docker container you can now run the **trtexec** command. Simply mount the directory containing youronnx model.
+```
+trtexec \
+  --onnx=ser_dyn.onnx \
+  --saveEngine=ser_fp16.plan \
+  --fp16 \
+  --memPoolSize=workspace:4096 \
+  --minShapes=waveform:1x16000,mask:1x16000 \
+  --optShapes=waveform:1x32000,mask:1x32000 \
+  --maxShapes=waveform:1x160000,mask:1x160000
+```
+You may have to find where specifically trtexec binary has been stored (maybe check the `/usr/lib` subdirectories, or just run `find -name trtexec`).
+I have made some C++ code to test my compiled model, but I want to do more tweaks before I share here. I seems to be working though so thats good.
 
 ## Future Work
 * Integrate a **Density Adaptive Attention Block** before or after the transformer layers to explore potential performance improvements.
