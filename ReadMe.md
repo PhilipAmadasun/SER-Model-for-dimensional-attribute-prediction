@@ -91,6 +91,29 @@ with torch.no_grad():
 print(predictions)
 ```
 
+## Conversion to onnx
+```
+import torch, torch.onnx
+from SER_Model_setup import SERModel
+
+device = "cuda"
+model = SERModel().to(device).eval()
+
+ckpt = torch.load("ser_checkpoints/best_weights.pt", map_location=device)
+model.load_state_dict(ckpt["model_state_dict"], strict=False)
+
+wav  = torch.randn(1, 32000, device=device)
+mask = torch.ones (1, 32000, device=device)
+
+torch.onnx.export(
+    model, (wav, mask), "ser_dyn.onnx",
+    opset_version=17,
+    input_names = ["waveform","mask"],
+    output_names= ["scores"],
+    dynamic_axes={"waveform":{1:"time"}, "mask":{1:"time"}})
+
+print("✓  ser_dyn.onnx regenerated with trained weights")
+```
 ## Future Work
 * Integrate a **Density Adaptive Attention Block** before or after the transformer layers to explore potential performance improvements.
 * Test feature extraction via Log Mel Spectrogram instead if pretrain WavLM SSL layers for lighter overhead, might need to test with DAAM to improve or atleast mitigate accuracy.
