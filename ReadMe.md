@@ -21,6 +21,7 @@ The following library versions were used for this work:
 ## Training Details
 - The model was trained using **Concordance Correlation Coefficient (CCC) loss**, as in the original implementation.
 - Evaluation metrics will be provided soon.
+- Training and eval sets contain audio of lengths **2.75 to 11 seconds**
 - The best-performing checkpoint is available—feel free to test it out and provide feedback!
 
 ## Usage Example (Jupyter Notebook Format)
